@@ -1,0 +1,43 @@
+name: JavaScript Build & Lint
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "air-canvas-website/**"
+  push:
+    branches:
+      - main
+    paths:
+      - "air-canvas-website/**"
+
+jobs:
+  js-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./air-canvas-website
+
+      - name: Run ESLint
+        run: npx eslint . --max-warnings=0
+        working-directory: ./air-canvas-website
+
+      - name: Build Project
+        run: npm run build
+        working-directory: ./air-canvas-website
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: js-build
+          path: ./air-canvas-website/build/
