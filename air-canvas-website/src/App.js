@@ -4,7 +4,7 @@ function App() {
   return (
     <div className="App">
       <h1>
-        b[u]ilts eoh home page
+        Testing this is visual
       </h1>
     </div>
   );
