@@ -4,7 +4,7 @@ function App() {
   return (
     <div className="App">
       <h1>
-        A really cool home page
+        b[u]ilts eoh home page
       </h1>
     </div>
   );
