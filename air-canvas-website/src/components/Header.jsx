@@ -1,5 +1,5 @@
 import "../assets/Header.css";
-import { Link, useLocation } from "react-router";
+import { Link } from "react-router";
 
 function Header() {
   return (
