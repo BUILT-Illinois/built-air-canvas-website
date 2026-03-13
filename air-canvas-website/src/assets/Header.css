@@ -11,6 +11,19 @@
   align-items: center;
 }
 
+.img-container {
+  display: flex;
+  align-items: center;
+}
+
+.right-container {
+  display: flex;
+}
+
+.title {
+  color: #B57757;
+}
+
 /* Keep your buttons */
 .header-button {
   color: white;
