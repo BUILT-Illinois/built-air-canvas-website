@@ -1,7 +1,10 @@
+import { useState } from "react";
 import "../assets/Header.css";
 import { Link } from "react-router";
 
 function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <div className="header">
       <div className="container">
@@ -15,13 +18,25 @@ function Header() {
           </Link>
           <h1 className="title">Air Canvas</h1>
         </div>
-        
-        
-        <div className="right-container">
-          <Link to="/about">
+
+        <button
+          className="hamburger"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle navigation"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <div className={`right-container ${menuOpen ? "open" : ""}`}>
+          <Link to="/" onClick={() => setMenuOpen(false)}>
+            <h2 className="header-button">Home</h2>
+          </Link>
+          <Link to="/about" onClick={() => setMenuOpen(false)}>
             <h2 className="header-button">About</h2>
           </Link>
-          <Link to="/data">
+          <Link to="/data" onClick={() => setMenuOpen(false)}>
             <h2 className="header-button">Data</h2>
           </Link>
         </div>

@@ -1,6 +1,6 @@
 .header {
   background-color: #e8c5af;
-  padding: 10px 20px;
+  padding: 10px;
   align-items: center;
   background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
 }
@@ -9,6 +9,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .img-container {
@@ -22,9 +24,9 @@
 
 .title {
   color: #B57757;
+  padding-left: 20px;
 }
 
-/* Keep your buttons */
 .header-button {
   color: white;
   margin: 0;
@@ -35,6 +37,7 @@
 
 .built-img {
   height: 5.5vw;
+  min-height: 100px;
   width: auto;
 }
 
@@ -43,4 +46,48 @@ a {
   outline: none;
 }
 
+/* Hamburger button — hidden on desktop */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
 
+.hamburger span {
+  display: block;
+  width: 26px;
+  height: 3px;
+  background-color: #B57757;
+  border-radius: 2px;
+}
+
+/* Mobile styles */
+@media (max-width: 600px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .right-container {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .right-container.open {
+    display: flex;
+  }
+
+  .header-button {
+    padding: 10px 8px;
+    font-size: 1rem;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+}

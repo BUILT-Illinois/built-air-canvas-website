@@ -1,0 +1,23 @@
+.home-container {
+    padding: 2vw;
+    background-color: #FFF4ED;
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-wrapper {
+    position: relative;
+    width: 75%;
+    padding-bottom: 42.19%; /* 56.25% of 75% */
+    height: auto;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

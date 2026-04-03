@@ -1,6 +1,16 @@
 .footer {
     background-color: #E8C5AF;
-    padding: 3vw;
+    padding: 1vw;
     text-align: center;
     color: white;
+}
+
+@media (max-width: 600px) {
+    .footer {
+        padding: 4vw;
+    }
+
+    .footer h1 {
+        font-size: 1rem;
+    }
 }
