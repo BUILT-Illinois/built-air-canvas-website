@@ -1,3 +1,9 @@
+module "cognito" {
+  source = "./modules/cognito"
+
+  identity_pool_name = "eoh-air-canvas"
+}
+
 module "web_app_s3" {
   source = "./modules/web_app_s3"
 
