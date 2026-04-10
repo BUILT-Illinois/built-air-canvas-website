@@ -3,7 +3,7 @@ import '../assets/Data.css';
 
 // Topics your air-canvas device publishes to.
 // Override with REACT_APP_AWS_IOT_TOPICS (comma-separated) in your .env file.
-let topics = ["air-canvas/data"]
+let topics = ["air-canvas/data/#"]
 
 export default function Data() {
   const { isConnected, messages, error } = useAwsIot(topics);
