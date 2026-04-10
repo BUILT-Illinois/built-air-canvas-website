@@ -13,6 +13,19 @@
     width: 50%;
 }
 
+.curved-box {
+  width: 90%;
+  align: center;
+  height: 275px;
+  background-color: rgb(228, 156, 84);
+  border-radius: 20px; 
+}
+
+.highlight-section {
+  background-color: rgb(219, 190, 147); /* You can use names, Hex, or RGB */
+  padding: 20px; /* Optional: adds space inside the color box */
+}
+
 @media (max-width: 600px) {
     .about-container {
         padding: 4vw;
