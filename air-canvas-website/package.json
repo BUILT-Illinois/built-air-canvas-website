@@ -11,8 +11,9 @@
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^13.5.0",
     "mqtt": "^4.3.8",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
+    "react": "^18.2.0",
+    "react-card-flip": "^1.2.3",
+    "react-dom": "^18.2.0",
     "react-router": "^7.13.1",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"

@@ -1,6 +1,6 @@
 import React from 'react';
 import "../assets/About.css";
-import PplSlider from '../components/Pplslider.jsx';
+import TeamCards from '../components/Teamcards.jsx';
 
 
 export default function About() {
@@ -75,7 +75,7 @@ export default function About() {
         </div>
 
     
-        <PplSlider
+        <TeamCards
           data={data}
         />
       </div>
@@ -87,24 +87,73 @@ export default function About() {
 
 const data = [
     {
-        image: "/public/logo192.png",
-        nombre: "President",
-        major: "Melissa Aninagyei-Bonsu",
-        pronouns: "she/her",
-        description: "Hey, I’m Melissa, President of B[U]ILT! I spend most of my time bouncing between classes, running track, playing flag football, and figuring out what to do with my hair next. Leading B[U]ILT is one of my favorite parts of college! I get to meet amazing people, plan fun events, and help create a community where we can all thrive."
-    },
-    {
-        image: "/public/logo192.png",
-        nombre: "Vice President",
-        major: "Bolden Jones",
+        image: "/pictures/Steven Uruchima.jpeg",
+        name: "Steven Uruchima",
+        major: "Computer Science",
         pronouns: "he/him",
-        description: "Hi, my name is Bolden! I am a senior studying Computer Science with a minor in Statistics, from Flossmoor, IL. As this year’s Vice President, I’m excited to help lead B[U]ILT in fostering community, supporting our members, and strengthening the overall impact of our organization. In my free time, I like going to the gym, playing volleyball, and playing electric guitar."
+        description: "Steven is a junior and as our project lead, worked on creating the system design and developing the plans for our project. He also directed the tech committee, organizing and directing members to finish our project."
     },
     {
-        image: "/public/logo192.png",
-        nombre: "Marketing Director",
-        major: "Paloma Pichardo",
+        image: "/pictures/Eduardo Aranda.jpg",
+        name: "Eduardo Aranda",
+        major: "Econometrics and Quantitative Economics ",
+        pronouns: "he/him",
+        description: "Eduardo is a junior who is minoring in Computer Science and Computer Engineering. As our Hardware Engineering Lead he worked on all the physical tools we are using for this project!"
+    },
+    {
+        image: "/pictures/David Okafo.jpg",
+        name: "David Okafo",
+        major: "Computer Science",
+        pronouns: "he/him",
+        description: "David is a junior and he worked on computer vision software, implementing gesture-based canvas controls. Note: he worked on having the hand gestures recorded by the camera perform specfici actions!"
+    },
+    {
+        image: "/pictures/Samuel Evangelista.jpg",
+        name: "Samuel Evangelista",
+        major: "Computer Science",
+        pronouns: "he/him",
+        description: "Sam is a junior and helped in the design and implementation for the User Interface and User Experience. The UI/ UX are all the visuals you're seeing right now!"
+    },
+    {
+        image: "/pictures/David Kabeya.jpg",
+        name: "David Kabeya",
+        major: "Statistics & Computer Science",
+        pronouns: "he/him",
+        description: "David Kabeya is a junior and he assisted with the design of the User Interface of the website."
+    },
+    {
+        image: "/pictures/Olamide Ogunjobi.jpg",
+        name: "Olamide Ogunjobi",
+        major: "Computer Science",
+        pronouns: "he/him",
+        description: "Olamide is a junior and he worked on enabling two fingers, left and right hands, drawing at the same time."
+    },
+    {
+        image: "/pictures/Audrey Ramirez.png",
+        name: "Audrey Ramirez",
+        major: "Computer Science",
         pronouns: "she/her",
-        description: "Hi! My name is Paloma Pichardo, and I am a sophomore studying Computer Science with a minor in Business. I am from Houston, Texas and really enjoy running, eating sushi, and the movie Fantastic Mr. Fox. I am so excited to serve as Marketing Director this school year and can’t wait to meet you all!"
+        description: "Audrey is a freshman and helped with the implementation of the 'About' webpage and the visualization of the hand skeleton."
+    },
+    {
+        image: "/pictures/Daniel Umana.jpg",
+        name: "Daniel Umana",
+        major: "Computer Science",
+        pronouns: "he/him",
+        description: "Daniel is a freshman and he worked on sending data from the cv and IoT wand to AWS as well as merging the two data onto the same screen."
+    },
+    {
+        image: "/pictures/Elias Ghanayem.jpg",
+        name: "Elias Ghanayem",
+        major: "Computer Science",
+        pronouns: "he/him",
+        description: "Elias is a freshman and he made sure the video streaming data we're using works safely and that the quality/ standard of the images are not lost."
+    },
+    {
+        image: "/pictures/thalia.jpeg",
+        name: "Thalia",
+        major: "Anthopology with a Minor in Computer Science",
+        pronouns: "she/her",
+        description: "Thalia is a sophomore and she helped create make the About webpage based on the designs made."
     },
 ]
