@@ -1,9 +1,10 @@
+import { useState, useEffect } from 'react';
 import { useAwsIot } from '../hooks/useAwsIot';
 import '../assets/Data.css';
 
-// Topics your air-canvas device publishes to.
-// Override with REACT_APP_AWS_IOT_TOPICS (comma-separated) in your .env file.
-let topics = ["air-canvas/data/#"]
+const REQUESTS_TOPIC = 'air-canvas/requests';
+const DATA_TOPICS = ['air-canvas/data/#', REQUESTS_TOPIC];
+const MAX_REQUEST_LOG = 5;
 
 // Component to display a single data value in a large, readable format
 function DataDisplay({ label, value, unit = '' }) {
@@ -50,21 +51,30 @@ function QuaternionDisplay({ label, quat, description }) {
 }
 
 export default function Data() {
-  const { isConnected, messages, error } = useAwsIot(topics);
+  const { isConnected, messages, error } = useAwsIot(DATA_TOPICS);
+  const [requestLog, setRequestLog] = useState([]);
+
+  useEffect(() => {
+    const msg = messages[REQUESTS_TOPIC];
+    if (!msg) return;
+    setRequestLog(prev => {
+      const entry = { ...msg, timestamp: new Date().toLocaleString() };
+      const next = [entry, ...prev];
+      return next.slice(0, MAX_REQUEST_LOG);
+    });
+  }, [messages[REQUESTS_TOPIC]]);
 
   const statusLabel = error
     ? 'Error'
     : isConnected
       ? 'Connected'
-      : 'Connecting…';
+      : 'Connecting\u2026';
 
   const statusClass = error
     ? 'disconnected'
     : isConnected
       ? 'connected'
       : 'connecting';
-
-  const hasMessages = Object.keys(messages).length > 0;
 
   // Extract data from messages
   const cvData = messages['air-canvas/data/cv'];
@@ -75,16 +85,15 @@ export default function Data() {
   const allTopics = Object.keys(messages);
 
   // Process CV landmarks data (hand tracking) - extract index finger only
-  // MediaPipe hand landmarks: 5=MCP, 6=PIP, 7=DIP, 8=TIP of index finger
   let indexFingerLandmarks = null;
   if (cvData && cvData.data && cvData.data.landmarks && Array.isArray(cvData.data.landmarks)) {
     const landmarks = cvData.data.landmarks;
     if (landmarks.length >= 9) {
       indexFingerLandmarks = {
-        mcp: landmarks[5],  // Metacarpophalangeal joint (base of finger)
-        pip: landmarks[6],  // Proximal interphalangeal joint
-        dip: landmarks[7],  // Distal interphalangeal joint
-        tip: landmarks[8]   // Fingertip
+        mcp: landmarks[5],
+        pip: landmarks[6],
+        dip: landmarks[7],
+        tip: landmarks[8]
       };
     }
   }
@@ -101,7 +110,7 @@ export default function Data() {
 
       <div className={`iot-status ${statusClass}`}>
         <span className="status-dot" />
-        AWS IoT Core — {statusLabel}
+        AWS IoT Core &mdash; {statusLabel}
       </div>
 
       {error && (
@@ -110,9 +119,24 @@ export default function Data() {
         </div>
       )}
 
-      {hasMessages ? (
+      <h2 className="section-title request-log-title">Recent Brush Requests</h2>
+      {requestLog.length > 0 ? (
+        <div className="request-log-list">
+          {requestLog.map((entry, i) => (
+            <div key={i} className="request-card">
+              <h3 className="request-card-time">{entry.timestamp}</h3>
+              <pre className="request-card-pre">{JSON.stringify({ color: entry.color, brushSize: entry.brushSize }, null, 2)}</pre>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p className="no-data" style={{ padding: '1rem' }}>
+          {isConnected ? 'Waiting for brush requests\u2026' : 'Not connected'}
+        </p>
+      )}
+
+      {(indexFingerLandmarks || wandData || handData) ? (
         <div className="data-grid">
-          {/* Display index finger tracking if available */}
           {indexFingerLandmarks && (
             <div className="device-section hand-section">
               <h2 className="section-title">Hand Tracking Data</h2>
@@ -141,7 +165,6 @@ export default function Data() {
             </div>
           )}
 
-          {/* Display wand data if available */}
           {wandData && (
             <div className="device-section wand-section">
               <h2 className="section-title">Wand Data</h2>
@@ -164,7 +187,6 @@ export default function Data() {
             </div>
           )}
 
-          {/* Display hand data if available */}
           {handData && (
             <div className="device-section hand-section">
               <h2 className="section-title">Hand Tracking</h2>
@@ -185,9 +207,10 @@ export default function Data() {
               </div>
             </div>
           )}
-
-          {/* Show debug info if no recognized data */}
-          {!wandData && !handData && !indexFingerLandmarks && (
+        </div>
+      ) : (
+        !error && (
+          allTopics.filter(t => t !== REQUESTS_TOPIC).length > 0 ? (
             <div className="no-specific-data">
               <p>Receiving data but format not recognized</p>
               <div className="raw-topics">
@@ -204,15 +227,13 @@ export default function Data() {
                 </ul>
               </div>
             </div>
-          )}
-        </div>
-      ) : (
-        !error && (
-          <p className="no-data">
-            {isConnected
-              ? 'Connected — waiting for messages…'
-              : 'Establishing secure WebSocket connection to AWS IoT Core…'}
-          </p>
+          ) : (
+            <p className="no-data">
+              {isConnected
+                ? 'Connected \u2014 waiting for messages\u2026'
+                : 'Establishing secure WebSocket connection to AWS IoT Core\u2026'}
+            </p>
+          )
         )
       )}
 

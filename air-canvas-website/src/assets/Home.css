@@ -8,9 +8,11 @@
 }
 
 .canvas-area {
-    position: relative;
     width: 75%;
-    padding-top: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
 }
 
 .video-wrapper {
@@ -29,12 +31,6 @@
 }
 
 .toolbar {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-
     display: flex;
     align-items: center;
     gap: 16px;
@@ -177,8 +173,7 @@
 /*  Mobile optimization */
 @media (max-width: 768px) {
     .canvas-area {
-        width: 95%;              /* use more screen */
-        padding-top: 110px;      /* extra space for wrapped toolbar */
+        width: 95%;
     }
 
     .toolbar {
