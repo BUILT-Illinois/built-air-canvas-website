@@ -4,6 +4,20 @@ import { useAwsIot } from "../hooks/useAwsIot";
 
 const REQUESTS_TOPIC = "air-canvas/requests";
 
+const COLORS = [
+    "red",
+    "green",
+    "blue",
+    "yellow",
+    "magenta",
+    "cyan",
+    "black",
+    "orange",
+    "lime",
+];
+
+const BRUSH_SIZES = ["small", "medium", "large"];
+
 export default function Home() {
     const [selectedColor, setSelectedColor] = useState("black");
     const [brushSize, setBrushSize] = useState("medium");
@@ -24,62 +38,46 @@ export default function Home() {
             <div className="canvas-area">
                 <div className="toolbar">
                     <div className="palette-section">
-                        <button
-                            className={`color-btn black ${selectedColor === "black" ? "selected" : ""}`}
-                            onClick={() => handleColorChange("black")}
-                        ></button>
-                        <button
-                            className={`color-btn blue ${selectedColor === "blue" ? "selected" : ""}`}
-                            onClick={() => handleColorChange("blue")}
-                        ></button>
-                        <button
-                            className={`color-btn orange ${selectedColor === "orange" ? "selected" : ""}`}
-                            onClick={() => handleColorChange("orange")}
-                        ></button>
-                        <button
-                            className={`color-btn yellow ${selectedColor === "yellow" ? "selected" : ""}`}
-                            onClick={() => handleColorChange("yellow")}
-                        ></button>
-                        <button
-                            className={`color-btn lime ${selectedColor === "lime" ? "selected" : ""}`}
-                            onClick={() => handleColorChange("lime")}
-                        ></button>
-                        <button
-                            className={`color-btn green ${selectedColor === "green" ? "selected" : ""}`}
-                            onClick={() => handleColorChange("green")}
-                        ></button>
+                        {COLORS.map((color) => (
+                            <button
+                                key={color}
+                                className={`color-btn ${color} ${selectedColor === color ? "selected" : ""}`}
+                                onClick={() => handleColorChange(color)}
+                                aria-label={`Select ${color}`}
+                                title={color}
+                            />
+                        ))}
                     </div>
 
                     <div className="divider"></div>
 
-                    <div className={`iot-status-mini ${error ? 'disconnected' : isConnected ? 'connected' : 'connecting'}`}>
+                    <div className={`iot-status-mini ${error ? "disconnected" : isConnected ? "connected" : "connecting"}`}>
                         <span className="status-dot" />
-                        {error ? 'Error' : isConnected ? 'Connected' : 'Connecting…'}
+                        {error ? "Error" : isConnected ? "Connected" : "Connecting..."}
                     </div>
 
                     <div className="divider"></div>
 
                     <div className="brush-section">
-                        <button
-                            className={`brush-btn ${brushSize === "small" ? "selected" : ""}`}
-                            onClick={() => handleBrushSizeChange("small")}
-                        >
-                            <span className="brush-dot small-dot"></span>
-                        </button>
-
-                        <button
-                            className={`brush-btn ${brushSize === "medium" ? "selected" : ""}`}
-                            onClick={() => handleBrushSizeChange("medium")}
-                        >
-                            <span className="brush-dot medium-dot"></span>
-                        </button>
-
-                        <button
-                            className={`brush-btn ${brushSize === "large" ? "selected" : ""}`}
-                            onClick={() => handleBrushSizeChange("large")}
-                        >
-                            <span className="brush-dot large-dot"></span>
-                        </button>
+                        {BRUSH_SIZES.map((size) => (
+                            <button
+                                key={size}
+                                className={`brush-btn ${brushSize === size ? "selected" : ""}`}
+                                onClick={() => handleBrushSizeChange(size)}
+                                aria-label={`Select ${size} brush`}
+                                title={size}
+                            >
+                                <span
+                                    className={`brush-dot ${
+                                        size === "small"
+                                            ? "small-dot"
+                                            : size === "medium"
+                                            ? "medium-dot"
+                                            : "large-dot"
+                                    }`}
+                                ></span>
+                            </button>
+                        ))}
                     </div>
                 </div>
 

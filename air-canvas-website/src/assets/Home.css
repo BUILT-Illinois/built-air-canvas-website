@@ -34,7 +34,6 @@
     display: flex;
     align-items: center;
     gap: 16px;
-
     background: #f7f7f7;
     border: 1px solid #d6d6d6;
     border-radius: 12px;
@@ -74,12 +73,41 @@
     outline-offset: 1px;
 }
 
-.black { background: black; }
-.blue { background: #1976d2; }
-.orange { background: #f57c00; }
-.yellow { background: #fbc02d; }
-.lime { background: #cddc39; }
-.green { background: #2e7d32; }
+.color-btn.red {
+    background-color: red;
+}
+
+.color-btn.green {
+    background-color: green;
+}
+
+.color-btn.blue {
+    background-color: blue;
+}
+
+.color-btn.yellow {
+    background-color: yellow;
+}
+
+.color-btn.magenta {
+    background-color: magenta;
+}
+
+.color-btn.cyan {
+    background-color: cyan;
+}
+
+.color-btn.black {
+    background-color: black;
+}
+
+.color-btn.orange {
+    background-color: orange;
+}
+
+.color-btn.lime {
+    background-color: lime;
+}
 
 .brush-btn {
     width: 46px;
@@ -124,8 +152,6 @@
     height: 20px;
 }
 
-
-/* IoT status indicator (compact, inline with toolbar) */
 .iot-status-mini {
     display: flex;
     align-items: center;
@@ -148,18 +174,25 @@
     background-color: #d4edda;
     color: #155724;
 }
-.iot-status-mini.connected .status-dot { background-color: #28a745; }
+
+.iot-status-mini.connected .status-dot {
+    background-color: #28a745;
+}
 
 .iot-status-mini.disconnected {
     background-color: #f8d7da;
     color: #721c24;
 }
-.iot-status-mini.disconnected .status-dot { background-color: #dc3545; }
+
+.iot-status-mini.disconnected .status-dot {
+    background-color: #dc3545;
+}
 
 .iot-status-mini.connecting {
     background-color: #fff3cd;
     color: #856404;
 }
+
 .iot-status-mini.connecting .status-dot {
     background-color: #ffc107;
     animation: pulse 1.2s infinite;
@@ -167,17 +200,16 @@
 
 @keyframes pulse {
     0%, 100% { opacity: 1; }
-    50%      { opacity: 0.3; }
+    50% { opacity: 0.3; }
 }
 
-/*  Mobile optimization */
 @media (max-width: 768px) {
     .canvas-area {
         width: 95%;
     }
 
     .toolbar {
-        flex-wrap: wrap;         /* allow wrapping */
+        flex-wrap: wrap;
         justify-content: center;
         gap: 12px;
         padding: 10px;
@@ -185,7 +217,7 @@
     }
 
     .divider {
-        display: none;           /* cleaner on mobile */
+        display: none;
     }
 
     .color-btn {
