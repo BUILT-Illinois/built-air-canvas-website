@@ -1,0 +1,190 @@
+.project-container {
+  padding: 3vw 4vw;
+  background-color: #FFF4ED;
+  min-height: 100vh;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.project-title {
+  color: #B57757;
+  font-size: 2rem;
+  margin: 0 0 0.5rem;
+}
+
+.project-subtitle {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 0 2rem;
+}
+
+/* Sections */
+.project-section {
+  margin-bottom: 2rem;
+}
+
+.project-section h2 {
+  color: #B57757;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.75rem;
+}
+
+.section-desc {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.section-desc code {
+  background: #ffe0cc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.85rem;
+}
+
+/* Gesture cards */
+.gesture-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.gesture-card {
+  background: #fff;
+  border: 2px solid #e8c5af;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.gesture-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+  width: 48px;
+  text-align: center;
+}
+
+.gesture-card h3 {
+  color: #B57757;
+  font-size: 1rem;
+  margin: 0 0 0.25rem;
+}
+
+.gesture-card p {
+  color: #555;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.draw-card {
+  border-left: 4px solid #28a745;
+}
+
+.clear-card {
+  border-left: 4px solid #dc3545;
+}
+
+.thickness-card {
+  border-left: 4px solid #ffc107;
+}
+
+.save-card {
+  border-left: 4px solid #1976d2;
+}
+
+.stop-card {
+  border-left: 4px solid #666;
+}
+
+/* Architecture flow */
+.arch-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.arch-card {
+  background: #fff;
+  border: 2px solid #e8c5af;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  width: 100%;
+}
+
+.arch-card h3 {
+  color: #B57757;
+  font-size: 1rem;
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.arch-card p {
+  color: #555;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.highlight-card {
+  border-color: #B57757;
+  background: #fff9f5;
+}
+
+.arch-arrow {
+  font-size: 1.5rem;
+  color: #B57757;
+  line-height: 1;
+  padding: 0.25rem 0;
+}
+
+/* Data flow cards */
+.data-flow-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.data-flow-card {
+  background: #fff;
+  border: 2px solid #e8c5af;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.data-flow-card h3 {
+  color: #B57757;
+  font-size: 0.9rem;
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.data-flow-card p {
+  color: #555;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Footer */
+.project-footer {
+  text-align: center;
+  color: #B57757;
+  font-size: 0.9rem;
+  padding: 2rem 0 1rem;
+  border-top: 1px solid #e8c5af;
+  margin-top: 2rem;
+}

@@ -39,6 +39,9 @@ function Header() {
           <Link to="/data" onClick={() => setMenuOpen(false)}>
             <h2 className="header-button">Data</h2>
           </Link>
+          <Link to="/project" onClick={() => setMenuOpen(false)}>
+            <h2 className="header-button">Project</h2>
+          </Link>
         </div>
       </div>
     </div>
