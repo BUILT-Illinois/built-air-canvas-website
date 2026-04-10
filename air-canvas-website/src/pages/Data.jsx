@@ -54,15 +54,16 @@ export default function Data() {
   const { isConnected, messages, error } = useAwsIot(DATA_TOPICS);
   const [requestLog, setRequestLog] = useState([]);
 
+  const latestRequest = messages[REQUESTS_TOPIC];
+
   useEffect(() => {
-    const msg = messages[REQUESTS_TOPIC];
-    if (!msg) return;
+    if (!latestRequest) return;
     setRequestLog(prev => {
-      const entry = { ...msg, timestamp: new Date().toLocaleString() };
+      const entry = { ...latestRequest, timestamp: new Date().toLocaleString() };
       const next = [entry, ...prev];
       return next.slice(0, MAX_REQUEST_LOG);
     });
-  }, [messages[REQUESTS_TOPIC]]);
+  }, [latestRequest]);
 
   const statusLabel = error
     ? 'Error'
