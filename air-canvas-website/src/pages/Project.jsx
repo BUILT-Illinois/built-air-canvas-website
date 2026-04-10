@@ -22,17 +22,7 @@ export default function Project() {
             <h3>Clear</h3>
             <p>Show an open palm to clear the entire canvas and start fresh.</p>
           </div>
-          <div className="gesture-card thickness-card">
-            <div className="gesture-icon">&#128077;</div>
-            <h3>Adjust Thickness</h3>
-            <p>Thumbs up increases line thickness. Thumbs down decreases it.</p>
-          </div>
-          <div className="gesture-card save-card">
-            <div className="gesture-icon">&#129311;</div>
-            <h3>Save Drawing</h3>
-            <p>Make the "I Love You" sign to save your drawing as a PNG.</p>
-          </div>
-          <div className="gesture-card stop-card">
+<div className="gesture-card stop-card">
             <div className="gesture-icon">&#9994;</div>
             <h3>Stop Drawing</h3>
             <p>Make a closed fist to stop drawing without clearing the canvas.</p>
