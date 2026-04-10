@@ -11,10 +11,10 @@ export default function Footer () {
                 <a href='https://github.com/BUILT-Illinois' target='_blank' rel='noopener noreferrer'>
                     <img src='/github-svgrepo-com.svg' alt='github svg' />
                 </a>
-                <a href='https://www.instagram.com/built_uiuc/' target='_blank' rel='noopener noreferrer'>
+                <a href='https://www.instagram.com/built_by_colorstack/' target='_blank' rel='noopener noreferrer'>
                     <img src='/instagram-svgrepo-com.svg' alt='instagram svg' />
                 </a>
-                <a href='https://www.linkedin.com/in/built-uiuc/' target='_blank' rel='noopener noreferrer'>
+                <a href='https://www.linkedin.com/company/builtbycolorstack/' target='_blank' rel='noopener noreferrer'>
                     <img src='/linkedin-svgrepo-com.svg' alt='linkedin svg' />
                 </a>
             </div>
