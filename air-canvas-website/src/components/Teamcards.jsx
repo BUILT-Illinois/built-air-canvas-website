@@ -31,11 +31,12 @@ function TeamCards(props) {
                         <div className='imgcontainer'>
                             <img className='image' src={item.image} alt='profpic'/>
                         </div>
-                        <h2 className='nombre'><span className='brown'>{item.name} ({item.major})</span></h2>
+                        <h2 className='nombre'>{item.name}</h2>
+                        <p className='study'>{item.major}</p>
                     </div>
 
                     <div className = 'impact' onClick={() => flipCard(index)}>
-                        <p className='cardText'>{item.description}</p>
+                        <p className='tasks'>{item.description}</p>
                     </div>
                 </ReactCardFlip>
             ))}
@@ -45,26 +46,3 @@ function TeamCards(props) {
 }
 
 export default TeamCards;
-/*
-const [isFlipped, setIsFlipped] = useState(false);
-    function flipCard(){
-        setIsFlipped(!isFlipped);
-}
-{props.data.map((item) => (
-    <div className='card-container'>
-            
-    </div>       
-                    /*<SwiperSlide className='slides'>
-                        <div className='cards'>
-                            <h2 className='nombre'><span className='brown'>{item.name} ({item.major})</span></h2>
-                            <p className='cardText'>{item.description}</p>
-                        </div>
-                        <div className='imgcontainer'>
-                            <img className='image' src={item.image} alt='profpic'/>
-                        </div>
-                    </SwiperSlide>
-
-                    <CardFlip style={styles.cardContainer} ref={(card) => this.card = card} >
-                        <TouchableOpacity style={styles.card} onPress={() => this.card.flip()} ><Text>AB</Text></TouchableOpacity>
-                        <TouchableOpacity style={styles.card} onPress={() => this.card.flip()} ><Text>CD</Text></TouchableOpacity>
-                    </CardFlip>*/

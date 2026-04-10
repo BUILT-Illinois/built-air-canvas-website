@@ -7,7 +7,7 @@
 
 .left {
     width: 50%;
-}0
+}
 
 .right {
     width: 50%;
@@ -22,7 +22,7 @@
 }
 
 .highlight-section {
-  background-color: rgb(219, 190, 147); /* You can use names, Hex, or RGB */
+  background-color: skyblue; /* You can use names, Hex, or RGBBOOP */
   padding: 20px; /* Optional: adds space inside the color box */
 }
 
