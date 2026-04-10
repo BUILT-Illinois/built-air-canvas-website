@@ -37,6 +37,7 @@ resource "aws_iam_role_policy" "unauthenticated_iot" {
         "iot:Connect",
         "iot:Subscribe",
         "iot:Receive",
+        "iot:Publish",
         "iot:AttachPolicy",
       ]
       Resource = "*"
@@ -56,7 +57,7 @@ resource "aws_iot_policy" "unauthenticated" {
     Version = "2012-10-17"
     Statement = [{
       Effect   = "Allow"
-      Action   = ["iot:Connect", "iot:Subscribe", "iot:Receive"]
+      Action   = ["iot:Connect", "iot:Subscribe", "iot:Receive", "iot:Publish"]
       Resource = "*"
     }]
   })

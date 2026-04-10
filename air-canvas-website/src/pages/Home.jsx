@@ -1,9 +1,23 @@
 import "../assets/Home.css";
 import { useState } from "react";
+import { useAwsIot } from "../hooks/useAwsIot";
+
+const REQUESTS_TOPIC = "air-canvas/requests";
 
 export default function Home() {
     const [selectedColor, setSelectedColor] = useState("black");
     const [brushSize, setBrushSize] = useState("medium");
+    const { publish, isConnected, error } = useAwsIot();
+
+    function handleColorChange(color) {
+        setSelectedColor(color);
+        publish(REQUESTS_TOPIC, { color, brushSize });
+    }
+
+    function handleBrushSizeChange(size) {
+        setBrushSize(size);
+        publish(REQUESTS_TOPIC, { color: selectedColor, brushSize: size });
+    }
 
     return (
         <div className="home-container">
@@ -12,28 +26,35 @@ export default function Home() {
                     <div className="palette-section">
                         <button
                             className={`color-btn black ${selectedColor === "black" ? "selected" : ""}`}
-                            onClick={() => setSelectedColor("black")}
+                            onClick={() => handleColorChange("black")}
                         ></button>
                         <button
                             className={`color-btn blue ${selectedColor === "blue" ? "selected" : ""}`}
-                            onClick={() => setSelectedColor("blue")}
+                            onClick={() => handleColorChange("blue")}
                         ></button>
                         <button
                             className={`color-btn orange ${selectedColor === "orange" ? "selected" : ""}`}
-                            onClick={() => setSelectedColor("orange")}
+                            onClick={() => handleColorChange("orange")}
                         ></button>
                         <button
                             className={`color-btn yellow ${selectedColor === "yellow" ? "selected" : ""}`}
-                            onClick={() => setSelectedColor("yellow")}
+                            onClick={() => handleColorChange("yellow")}
                         ></button>
                         <button
                             className={`color-btn lime ${selectedColor === "lime" ? "selected" : ""}`}
-                            onClick={() => setSelectedColor("lime")}
+                            onClick={() => handleColorChange("lime")}
                         ></button>
                         <button
                             className={`color-btn green ${selectedColor === "green" ? "selected" : ""}`}
-                            onClick={() => setSelectedColor("green")}
+                            onClick={() => handleColorChange("green")}
                         ></button>
+                    </div>
+
+                    <div className="divider"></div>
+
+                    <div className={`iot-status-mini ${error ? 'disconnected' : isConnected ? 'connected' : 'connecting'}`}>
+                        <span className="status-dot" />
+                        {error ? 'Error' : isConnected ? 'Connected' : 'Connecting…'}
                     </div>
 
                     <div className="divider"></div>
@@ -41,21 +62,21 @@ export default function Home() {
                     <div className="brush-section">
                         <button
                             className={`brush-btn ${brushSize === "small" ? "selected" : ""}`}
-                            onClick={() => setBrushSize("small")}
+                            onClick={() => handleBrushSizeChange("small")}
                         >
                             <span className="brush-dot small-dot"></span>
                         </button>
 
                         <button
                             className={`brush-btn ${brushSize === "medium" ? "selected" : ""}`}
-                            onClick={() => setBrushSize("medium")}
+                            onClick={() => handleBrushSizeChange("medium")}
                         >
                             <span className="brush-dot medium-dot"></span>
                         </button>
 
                         <button
                             className={`brush-btn ${brushSize === "large" ? "selected" : ""}`}
-                            onClick={() => setBrushSize("large")}
+                            onClick={() => handleBrushSizeChange("large")}
                         >
                             <span className="brush-dot large-dot"></span>
                         </button>

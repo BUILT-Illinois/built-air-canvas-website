@@ -73,8 +73,9 @@
 }
 
 .color-btn.selected {
-    border: 3px solid #666;
-    box-shadow: 0 0 0 2px white inset;
+    border: 2px solid #666;
+    outline: 2px solid #666;
+    outline-offset: 1px;
 }
 
 .black { background: black; }
@@ -127,6 +128,51 @@
     height: 20px;
 }
 
+
+/* IoT status indicator (compact, inline with toolbar) */
+.iot-status-mini {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.iot-status-mini .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.iot-status-mini.connected {
+    background-color: #d4edda;
+    color: #155724;
+}
+.iot-status-mini.connected .status-dot { background-color: #28a745; }
+
+.iot-status-mini.disconnected {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+.iot-status-mini.disconnected .status-dot { background-color: #dc3545; }
+
+.iot-status-mini.connecting {
+    background-color: #fff3cd;
+    color: #856404;
+}
+.iot-status-mini.connecting .status-dot {
+    background-color: #ffc107;
+    animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.3; }
+}
 
 /*  Mobile optimization */
 @media (max-width: 768px) {
