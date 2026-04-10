@@ -5,6 +5,50 @@ import '../assets/Data.css';
 // Override with REACT_APP_AWS_IOT_TOPICS (comma-separated) in your .env file.
 let topics = ["air-canvas/data/#"]
 
+// Component to display a single data value in a large, readable format
+function DataDisplay({ label, value, unit = '' }) {
+  return (
+    <div className="data-display">
+      <div className="data-label">{label}</div>
+      <div className="data-value">
+        {typeof value === 'number' ? value.toFixed(2) : value ?? '--'}
+        {unit && <span className="data-unit">{unit}</span>}
+      </div>
+    </div>
+  );
+}
+
+// Component to display vector data (x, y, z)
+function VectorDisplay({ label, vector, description }) {
+  return (
+    <div className="vector-display">
+      <h2 className="vector-label">{label}</h2>
+      {description && <p className="vector-description">{description}</p>}
+      <div className="vector-grid">
+        <DataDisplay label="X" value={vector?.x} />
+        <DataDisplay label="Y" value={vector?.y} />
+        <DataDisplay label="Z" value={vector?.z} />
+      </div>
+    </div>
+  );
+}
+
+// Component to display quaternion data (w, x, y, z)
+function QuaternionDisplay({ label, quat, description }) {
+  return (
+    <div className="quaternion-display">
+      <h2 className="quaternion-label">{label}</h2>
+      {description && <p className="quaternion-description">{description}</p>}
+      <div className="quaternion-grid">
+        <DataDisplay label="W" value={quat?.w} />
+        <DataDisplay label="X" value={quat?.x} />
+        <DataDisplay label="Y" value={quat?.y} />
+        <DataDisplay label="Z" value={quat?.z} />
+      </div>
+    </div>
+  );
+}
+
 export default function Data() {
   const { isConnected, messages, error } = useAwsIot(topics);
 
@@ -22,6 +66,35 @@ export default function Data() {
 
   const hasMessages = Object.keys(messages).length > 0;
 
+  // Extract data from messages
+  const cvData = messages['air-canvas/data/cv'];
+  const wandRawData = messages['air-canvas/data/wand'] || messages['wand'] || null;
+  const handData = messages['air-canvas/data/hand'] || messages['hand'] || null;
+
+  // For debugging - get all message data
+  const allTopics = Object.keys(messages);
+
+  // Process CV landmarks data (hand tracking) - extract index finger only
+  // MediaPipe hand landmarks: 5=MCP, 6=PIP, 7=DIP, 8=TIP of index finger
+  let indexFingerLandmarks = null;
+  if (cvData && cvData.data && cvData.data.landmarks && Array.isArray(cvData.data.landmarks)) {
+    const landmarks = cvData.data.landmarks;
+    if (landmarks.length >= 9) {
+      indexFingerLandmarks = {
+        mcp: landmarks[5],  // Metacarpophalangeal joint (base of finger)
+        pip: landmarks[6],  // Proximal interphalangeal joint
+        dip: landmarks[7],  // Distal interphalangeal joint
+        tip: landmarks[8]   // Fingertip
+      };
+    }
+  }
+
+  // Process wand data
+  let wandData = null;
+  if (wandRawData && wandRawData.data) {
+    wandData = wandRawData.data;
+  }
+
   return (
     <div className="data-container">
       <h1>Live Device Data</h1>
@@ -38,13 +111,100 @@ export default function Data() {
       )}
 
       {hasMessages ? (
-        <div className="topic-grid">
-          {Object.entries(messages).map(([topic, payload]) => (
-            <div key={topic} className="topic-card">
-              <h3>{topic}</h3>
-              <pre>{JSON.stringify(payload, null, 2)}</pre>
+        <div className="data-grid">
+          {/* Display index finger tracking if available */}
+          {indexFingerLandmarks && (
+            <div className="device-section hand-section">
+              <h2 className="section-title">Hand Tracking Data</h2>
+              <div className="data-content">
+                <VectorDisplay
+                  label="Fingertip"
+                  vector={indexFingerLandmarks.tip}
+                  description="The tip of the index finger"
+                />
+                <VectorDisplay
+                  label="DIP Joint"
+                  vector={indexFingerLandmarks.dip}
+                  description="Distal interphalangeal joint (closest to tip)"
+                />
+                <VectorDisplay
+                  label="PIP Joint"
+                  vector={indexFingerLandmarks.pip}
+                  description="Proximal interphalangeal joint (middle)"
+                />
+                <VectorDisplay
+                  label="MCP Joint"
+                  vector={indexFingerLandmarks.mcp}
+                  description="Metacarpophalangeal joint (knuckle/base)"
+                />
+              </div>
             </div>
-          ))}
+          )}
+
+          {/* Display wand data if available */}
+          {wandData && (
+            <div className="device-section wand-section">
+              <h2 className="section-title">Wand Data</h2>
+              <div className="data-content">
+                {wandData.tip && wandData.tip.quaternion && (
+                  <QuaternionDisplay
+                    label="Tip Orientation"
+                    quat={wandData.tip.quaternion}
+                    description="Orientation of the wand tip sensor"
+                  />
+                )}
+                {wandData.base && wandData.base.quaternion && (
+                  <QuaternionDisplay
+                    label="Base Orientation"
+                    quat={wandData.base.quaternion}
+                    description="Orientation of the wand base sensor"
+                  />
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Display hand data if available */}
+          {handData && (
+            <div className="device-section hand-section">
+              <h2 className="section-title">Hand Tracking</h2>
+              <div className="data-content">
+                {handData.position && <VectorDisplay label="Position" vector={handData.position} />}
+                {handData.rotation && <QuaternionDisplay label="Rotation" quat={handData.rotation} />}
+                {handData.velocity && <VectorDisplay label="Velocity" vector={handData.velocity} />}
+                {handData.gesture && (
+                  <div className="gesture-display">
+                    <DataDisplay label="Gesture" value={handData.gesture} />
+                  </div>
+                )}
+                {handData.confidence !== undefined && (
+                  <div className="confidence-display">
+                    <DataDisplay label="Confidence" value={handData.confidence} unit="%" />
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Show debug info if no recognized data */}
+          {!wandData && !handData && !indexFingerLandmarks && (
+            <div className="no-specific-data">
+              <p>Receiving data but format not recognized</p>
+              <div className="raw-topics">
+                <h3>Active topics ({allTopics.length}):</h3>
+                <ul>
+                  {allTopics.map(topic => (
+                    <li key={topic}>
+                      <strong>{topic}</strong>
+                      <pre style={{fontSize: '0.75rem', marginTop: '0.5rem'}}>
+                        {JSON.stringify(messages[topic], null, 2)}
+                      </pre>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          )}
         </div>
       ) : (
         !error && (

@@ -1,24 +1,25 @@
 .data-container {
-  padding: 4vw 6vw;
+  padding: 1.5vw 2.5vw;
   background-color: #FFF4ED;
-  min-height: 80vh;
+  min-height: 100vh;
 }
 
 .data-container h1 {
   color: #B57757;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
 }
 
 /* Status bar */
 .iot-status {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 16px;
-  border-radius: 8px;
-  font-size: 0.95rem;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
   font-weight: 600;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
   width: fit-content;
 }
 
@@ -67,47 +68,208 @@
   font-size: 0.9rem;
 }
 
-/* Topic cards grid */
-.topic-grid {
+/* Data grid - main layout */
+.data-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* Device section (Wand or Hand) */
+.device-section {
+  background: #fff;
+  border: 2px solid #e8c5af;
+  border-radius: 8px;
+  padding: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.section-title {
+  color: #B57757;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.data-content {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+  gap: 0.5rem;
+}
+
+/* Single data display item */
+.data-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.5rem;
+  background: #fdf6f0;
+  border-radius: 6px;
+}
+
+.data-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #B57757;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.data-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  font-family: 'Courier New', monospace;
+  line-height: 1;
+}
+
+.data-unit {
+  font-size: 1rem;
+  color: #666;
+  margin-left: 0.3rem;
+}
+
+/* Vector display (x, y, z) */
+.vector-display {
+  background: #fff9f5;
+  border: 1px solid #e8c5af;
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+
+.vector-label {
+  color: #B57757;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+  text-align: center;
+}
+
+.vector-description {
+  color: #666;
+  font-size: 0.65rem;
+  font-style: italic;
+  margin: 0 0 0.35rem 0;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.vector-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem;
+}
+
+/* Quaternion display (w, x, y, z) */
+.quaternion-display {
+  background: #fff9f5;
+  border: 1px solid #e8c5af;
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+
+.quaternion-label {
+  color: #B57757;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+  text-align: center;
+}
+
+.quaternion-description {
+  color: #666;
+  font-size: 0.65rem;
+  font-style: italic;
+  margin: 0 0 0.35rem 0;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.quaternion-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.4rem;
+}
+
+/* Button, gesture, and confidence displays */
+.button-display,
+.gesture-display,
+.confidence-display {
   margin-top: 1rem;
 }
 
-.topic-card {
-  background: #fff;
-  border: 1px solid #e8c5af;
-  border-radius: 10px;
-  padding: 18px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+.button-display .data-value {
+  color: #28a745;
 }
 
-.topic-card h3 {
-  color: #B57757;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin: 0 0 10px;
-  word-break: break-all;
+.gesture-display .data-value {
+  font-size: 3rem;
+  text-transform: capitalize;
 }
 
-.topic-card pre {
+/* Landmarks grid */
+.landmarks-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.more-landmarks {
+  text-align: center;
+  padding: 1.5rem;
   background: #fdf6f0;
-  border-radius: 6px;
-  padding: 10px;
-  font-size: 0.82rem;
-  overflow-x: auto;
-  margin: 0;
-  color: #333;
-  white-space: pre-wrap;
-  word-break: break-word;
+  border-radius: 8px;
+  color: #B57757;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* No specific data message */
+.no-specific-data {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+}
+
+.no-specific-data p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.raw-topics {
+  background: #fdf6f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: left;
+  display: inline-block;
+}
+
+.raw-topics h3 {
+  color: #B57757;
+  margin-bottom: 1rem;
+}
+
+.raw-topics ul {
+  list-style: none;
+  padding: 0;
+}
+
+.raw-topics li {
+  font-family: monospace;
+  padding: 0.5rem;
+  background: #fff;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
 }
 
 .no-data {
   color: #aaa;
   font-style: italic;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 3rem;
 }
 
 /* Config note */
@@ -129,8 +291,71 @@
   font-family: monospace;
 }
 
+/* Responsive design */
+@media (max-width: 900px) {
+  .data-value {
+    font-size: 2.75rem;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+  }
+
+  .vector-label,
+  .quaternion-label {
+    font-size: 1.1rem;
+  }
+
+  .vector-description,
+  .quaternion-description {
+    font-size: 0.8rem;
+  }
+
+  .data-label {
+    font-size: 0.9rem;
+  }
+}
+
 @media (max-width: 600px) {
   .data-container {
-    padding: 5vw;
+    padding: 3vw;
+  }
+
+  .data-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .data-value {
+    font-size: 2.25rem;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+  }
+
+  .vector-label,
+  .quaternion-label {
+    font-size: 1rem;
+  }
+
+  .vector-description,
+  .quaternion-description {
+    font-size: 0.75rem;
+  }
+
+  .vector-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quaternion-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .device-section {
+    padding: 1rem;
+  }
+
+  .data-display {
+    padding: 0.75rem;
   }
 }
